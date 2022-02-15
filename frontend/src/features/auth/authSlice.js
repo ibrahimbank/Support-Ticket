@@ -38,6 +38,7 @@ export const register = createAsyncThunk(
 //2. login user
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   try {
+    console.log(await authService.login(user));
     return await authService.login(user);
   } catch (error) {
     const message =

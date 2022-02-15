@@ -51,6 +51,7 @@ function Login() {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    //after the login button is click it return the whole data, so we create a variable to get the value we want from it
     const userData = {
       email,
       password,
