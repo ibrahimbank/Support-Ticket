@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getTicket, reset, closeTicket } from "../features/ticket/ticketSlice";
+import { getTicket, closeTicket } from "../features/ticket/ticketSlice";
+import { getNotes, reset as noteReset } from "../features/notes/noteSlice";
 import BackButton from "../component/BackButton";
 import Spinner from "../component/Spinner";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
@@ -9,6 +10,9 @@ import { toast } from "react-toastify";
 function Ticket() {
   const { ticket, isLoading, isSuccess, isError, message } = useSelector(
     (state) => state.ticket
+  );
+  const { notes, isLoading: noteIsLoading } = useSelector(
+    (state) => state.notes
   );
 
   const params = useParams();
