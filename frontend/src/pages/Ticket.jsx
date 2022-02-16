@@ -6,6 +6,7 @@ import BackButton from "../component/BackButton";
 import Spinner from "../component/Spinner";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import NoteItem from "../component/NoteItem";
 
 function Ticket() {
   const { ticket, isLoading, isSuccess, isError, message } = useSelector(
@@ -29,6 +30,7 @@ function Ticket() {
     }
 
     dispatch(getTicket(ticketId));
+    dispatch(getNotes(ticketId));
     // eslint-disable-next-line
   }, [isError, message, ticketId]);
 
@@ -39,7 +41,7 @@ function Ticket() {
     navigate("/tickets");
   };
 
-  if (isLoading) {
+  if (isLoading || noteIsLoading) {
     return <Spinner />;
   }
 
@@ -68,6 +70,12 @@ function Ticket() {
           <h3>Description of Issue</h3>
           <p>{ticket.description}</p>
         </div>
+
+        <h2>Notes</h2>
+
+        {notes.map((note) => (
+          <NoteItem key={note._id} note={note} />
+        ))}
       </header>
 
       {ticket.status !== "closed" && (
